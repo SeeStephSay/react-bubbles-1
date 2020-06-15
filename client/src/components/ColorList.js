@@ -24,16 +24,8 @@ const ColorList = ({ colors, updateColors }) => {
 		// where is it saved right now?
 		axiosWithAuth()
 			.put(`http://localhost:5000/api/colors/${colorToEdit.id}`, colorToEdit)
-			.then((res) => {
-				axiosWithAuth()
-					.get(`http://localhost:5000/api/colors`)
-					.then((res) => {
-						updateColors(res.data);
-					})
-					.catch((error) => console.log('Update get error', error));
-			})
-			.catch((error) => console.log('Update put error', error));
-		setEditing(false);
+			.then((res) => setEditing(false))
+			.catch((error) => console.log(error.message, error.response));
 	};
 
 	const deleteColor = (color) => {
